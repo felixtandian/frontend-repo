@@ -2,17 +2,25 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { getUsers, updateUserData } from '../apis/users';
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
 interface UserState {
-    data: any;
+    user: any;
     loading: boolean;
     error: string | null;
+    userData: User | null;
     updateStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
 }   
 
 const initialState: UserState = {
-  data: null,
+  user: null,
   loading: false,
   error: null,
+  userData: null,
   updateStatus: 'idle',
 };
 
@@ -39,7 +47,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.user = action.payload;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
@@ -51,7 +59,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.updateStatus = 'succeeded';
-        state.data = action.payload;
+        state.user = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.updateStatus = 'failed';

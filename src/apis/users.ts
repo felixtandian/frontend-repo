@@ -6,7 +6,7 @@ export async function getUsers(userid: string) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer some-token`, // Replace with actual token}`,
+            Authorization: `Bearer some-token`, 
         },
     });
     if (!response.ok) {
@@ -16,12 +16,12 @@ export async function getUsers(userid: string) {
 }
 
 export async function updateUserData(userData: any ) {
-    const response = await fetch(`${baseUrl}users/update/`, {
+    const response = await fetch(`${baseUrl}updateUsers/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 
-                `Bearer some-token`, // Replace with actual token}`,
+                `Bearer some-token`,
         },
         body: JSON.stringify(userData),
     });
